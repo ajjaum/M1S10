@@ -1,7 +1,7 @@
 package br.com.fullStack.education.M1S10.controllers;
 
-import br.com.fullStack.education.M1S10.entities.AlunoEntity;
-import br.com.fullStack.education.M1S10.services.AlunoService;
+import br.com.fullStack.education.M1S10.entities.MaterialEntity;
+import br.com.fullStack.education.M1S10.services.MaterialService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,29 +10,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("alunos")
+@RequestMapping("materiais")
 @AllArgsConstructor
-public class AlunoController {
+public class MaterialController {
 
-    private final AlunoService service;
+    private final MaterialService service;
 
     @GetMapping
-    public ResponseEntity<List<AlunoEntity>> get() {
+    public ResponseEntity<List<MaterialEntity>> get() {
         return ResponseEntity.ok(service.buscarTodos());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<AlunoEntity> getId(@PathVariable Long id) {
+    public ResponseEntity<MaterialEntity> getId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
+    @GetMapping("agenda-id/{agendaId}")
+    public ResponseEntity<List<MaterialEntity>> getAgendaId(@PathVariable Long agendaId) {
+        return ResponseEntity.ok(service.buscarPorAgenda(agendaId));
+    }
+
     @PostMapping
-    public ResponseEntity<AlunoEntity> post(@RequestBody AlunoEntity request) {
+    public ResponseEntity<MaterialEntity> post(@RequestBody MaterialEntity request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(request));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AlunoEntity> put(@PathVariable Long id, @RequestBody AlunoEntity request) {
+    public ResponseEntity<MaterialEntity> put(@PathVariable Long id, @RequestBody MaterialEntity request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.alterar(id, request));
     }
 

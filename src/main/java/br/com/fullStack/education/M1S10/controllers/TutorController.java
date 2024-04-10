@@ -1,7 +1,7 @@
 package br.com.fullStack.education.M1S10.controllers;
 
-import br.com.fullStack.education.M1S10.entities.AlunoEntity;
-import br.com.fullStack.education.M1S10.services.AlunoService;
+import br.com.fullStack.education.M1S10.entities.TutorEntity;
+import br.com.fullStack.education.M1S10.services.TutorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("alunos")
+@RequestMapping("tutores")
 @AllArgsConstructor
-public class AlunoController {
+public class TutorController {
 
-    private final AlunoService service;
+    private final TutorService service;
 
     @GetMapping
-    public ResponseEntity<List<AlunoEntity>> get() {
+    public ResponseEntity<List<TutorEntity>> get() {
         return ResponseEntity.ok(service.buscarTodos());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<AlunoEntity> getId(@PathVariable Long id) {
+    public ResponseEntity<TutorEntity> getId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<AlunoEntity> post(@RequestBody AlunoEntity request) {
+    public ResponseEntity<TutorEntity> post(@RequestBody TutorEntity request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(request));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AlunoEntity> put(@PathVariable Long id, @RequestBody AlunoEntity request) {
+    public ResponseEntity<TutorEntity> put(@PathVariable Long id, @RequestBody TutorEntity request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.alterar(id, request));
     }
 

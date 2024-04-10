@@ -1,9 +1,15 @@
 package br.com.fullStack.education.M1S10.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -11,7 +17,7 @@ import java.time.LocalDate;
 public class AgendaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
     @ManyToOne
@@ -23,7 +29,7 @@ public class AgendaEntity {
     private TutorEntity tutor;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime data;
 
     @Column(nullable = false, length = 10)
     private String status;
